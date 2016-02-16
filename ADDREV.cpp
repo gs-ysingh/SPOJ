@@ -12,6 +12,16 @@ int reverse(int n, int l) {
 	}
 }
 
+int reverseFast(int x) {
+	int y = 0;
+	while (x > 0) {
+		y *= 10;
+	    y += ( x %10 );
+	    x /= 10; 
+	}
+	return y;
+}
+
 int getDigit(int n) {
 	if(n < 10) {
 		return 1;
@@ -24,10 +34,19 @@ int getDigit(int n) {
 int main() {
 	int t, m, n, i;
 	cin >> t; 
+	
+	//My Method:
+	// while(t--) {
+	// 	cin >> m >> n;
+	// 	i = reverse(m, getDigit(m)) + reverse(n, getDigit(n));
+	// 	cout << reverse(i, getDigit(i)) << "\n";
+	// }
+
+	//2nd method without getting digit:
 	while(t--) {
 		cin >> m >> n;
-		i = reverse(m, getDigit(m)) + reverse(n, getDigit(n));
-		cout << reverse(i, getDigit(i)) << "\n";
+		i = reverseFast(m) + reverseFast(n);
+		cout << reverseFast(i) << "\n";
 	}
 	return 0;
 }
