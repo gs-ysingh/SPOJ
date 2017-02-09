@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 import java.util.Scanner;
 
 /**
@@ -30,11 +29,80 @@ public class PALIN {
         }
 
         //Step 1: Point
+        int mid = k.length() / 2;
+        int i = 0;
+        int j = 0;
+        if(k.length() % 2 == 0) {
+            i = mid - 1;
+            j = mid;
+        }
+        else {
+            i = mid - 1;
+            j = mid + 1;
+        }
 
-        //Case 2:
+        //save i and j, we will need it again
 
+        int m = i;
+        int n = j;
 
-        return reverseString(k);
+        while (i > 0 && j < k.length() && k.charAt(i) == k.charAt(j)) {
+            i--;
+            j++;
+        }
+
+        if(i == 0 && j == k.length()) {
+            i = m;
+            j = n;
+            return getNextString(k, i, j, mid);
+        }
+        else {
+            //Case 2.1
+            if((int)k.charAt(i) > (int)k.charAt(j)) {
+                StringBuilder sb = new StringBuilder(k);
+                while (i >= 0) {
+                    sb.setCharAt(j, sb.charAt(i));
+                    i--;
+                    j++;
+                }
+                return sb.toString();
+            }
+            else {
+                i = m;
+                j = n;
+                return getNextString(k, i, j, mid);
+            }
+        }
+
+    }
+
+    private static String getNextString(String k, int i, int j, int mid) {
+        int val = 0;
+        int carry = 0;
+        StringBuilder sb = new StringBuilder(k);
+
+        if(k.length() % 2 == 0) {
+            mid = k.length() / 2 - 1;
+            carry = 1;
+        }
+        else {
+            mid = k.length() / 2;
+            val = Character.getNumericValue(sb.charAt(mid)) + 1;
+            carry = val / 10;
+            val = val % 10;
+            sb.setCharAt(mid, Character.forDigit(val, 10));
+        }
+
+        while (i >= 0) {
+            val = Character.getNumericValue(sb.charAt(i))+ carry;
+            carry = val / 10;
+            val = val % 10;
+            sb.setCharAt(i, Character.forDigit(val, 10));
+            sb.setCharAt(j, Character.forDigit(val, 10));
+            i--;
+            j++;
+        }
+        return sb.toString();
     }
 
     private static boolean allNine(String k) {
@@ -48,12 +116,7 @@ public class PALIN {
         if(flag == 0) {
             return true;
         }
-
         return false;
-    }
-
-    private static String reverseString(String s) {
-        return new StringBuilder(s).reverse().toString();
     }
 
 }
