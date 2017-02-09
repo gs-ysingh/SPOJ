@@ -7,30 +7,53 @@ import java.util.Scanner;
 public class PALIN {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        int n = scanner.nextInt();
+        int n = Integer.parseInt(scanner.nextLine());
         while (n > 0) {
-            BigInteger k = scanner.nextBigInteger();
+            String k = scanner.nextLine();
             System.out.println(getNextPalindrome(k));
             n--;
         }
     }
 
-    private static BigInteger getNextPalindrome(BigInteger k) {
-        while (true) {
-            k = k.add(BigInteger.ONE);
-            if(k.compareTo(reverseFast(k)) == 0) {
-                break;
+    private static String getNextPalindrome(String k) {
+        //Case 1: All 9's
+        if(allNine(k)) {
+            //999 - 1001
+            StringBuilder sb = new StringBuilder("1");
+            int count = k.length() - 1;
+            while (count > 0) {
+                sb.append("0");
+                count--;
             }
+            sb.append("1");
+            return sb.toString();
         }
-        return k;
+
+        //Step 1: Point
+
+        //Case 2:
+
+
+        return reverseString(k);
     }
 
-    private static BigInteger reverseFast(BigInteger k) {
-        BigInteger res = BigInteger.ZERO;
-        while (k.compareTo(BigInteger.ZERO) > 0) {
-            res = res.multiply(new BigInteger("10")).add(k.mod(new BigInteger("10"))) ;
-            k = k.divide(new BigInteger("10"));
+    private static boolean allNine(String k) {
+        int flag = 0;
+        for (int i = 0; i < k.length(); i++) {
+            if(k.charAt(i) != '9') {
+                flag = 1;
+            }
         }
-        return res;
+
+        if(flag == 0) {
+            return true;
+        }
+
+        return false;
     }
+
+    private static String reverseString(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+
 }
