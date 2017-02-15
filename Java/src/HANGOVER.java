@@ -1,9 +1,6 @@
 import java.math.BigDecimal;
 import java.util.Scanner;
 
-/**
- * Created by YSingh on 14/02/17.
- */
 public class HANGOVER {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
