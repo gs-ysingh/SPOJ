@@ -1,29 +1,27 @@
-import java.math.BigDecimal;
 import java.util.Scanner;
 
+/**
+ * Created by YSingh on 14/02/17.
+ */
 public class HANGOVER {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        double value = Double.parseDouble(sc.nextLine());
+        float value = Float.parseFloat(sc.nextLine());
         int n = 1;
-        Double sum = (double) Math.round(100.0 / (n + 1)) / 100.0;
+        float sum = (float)1 / (n + 1);
         int count = 0;
         while (value != 0.0) {
             count = 1;
             while (sum < value ) {
                 count++;
                 n++;
-                sum = (double) Math.round((sum + (1 / (n + 1)))* 100.0 / 100.0);
+                sum = sum + ((float)1 / (n + 1));
             }
-            System.out.println(count);
+            System.out.println(count + " card(s)");
             value = Float.parseFloat(sc.nextLine());
+            n = 1;
+            sum = (float)1 / (n + 1);
         }
 
-    }
-
-    public static BigDecimal round(float d, int decimalPlace) {
-        BigDecimal bd = new BigDecimal(Float.toString(d));
-        bd = bd.setScale(decimalPlace, BigDecimal.ROUND_HALF_UP);
-        return bd;
     }
 }
