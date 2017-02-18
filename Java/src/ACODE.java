@@ -26,7 +26,15 @@ public class ACODE {
         }
 
         String [] arr = value.split("");
+        return mergeDecoding(arr, map);
+    }
 
-        return 0;
+    private static int mergeDecoding(String[] arr, Map<String, Integer> map) {
+        while (arr.length != 1) {
+            for (int i = 0; i < (arr.length / 2); i++) {
+                //merge arr[2*i] and arr[2*i + 1] and push to array of size arr.length / 2
+
+            }
+        }
     }
 }
